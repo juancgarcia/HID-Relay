@@ -88,7 +88,6 @@ class MouseRptParser : public HIDRelay
 };
 
 void MouseRptParser::Parse(USBHID *hid, bool is_rpt_id, uint8_t len, uint8_t *buf) {
-//    DEBUG_PRINTLN("Mouse");
   //    DEBUG_PRINTLN("Mouse");
   Serial.write((uint8_t)0xFD); // BT-HID: Start Byte
   Serial.write((uint8_t)0x05); // BT-HID: Data Length
@@ -151,7 +150,7 @@ void setup() {
   pinMode(powerCheck, INPUT);                   // USB power check input
   digitalWrite(softLatch, HIGH);                // Hold the soft latch transistor HIGH to keep the micro controller turned on
 
-  attachInterrupt(0, buttonEvent, FALLING);     // Get interrupts from the pin 2 (0) and call the "buttonEvent" function (ISR)
+  attachInterrupt(0, buttonEvent, CHANGE);     // Get interrupts from the pin 2 (0) and call the "buttonEvent" function (ISR)
   buttonPressed = false;                        // Set the button state as UNPRESSED
 
   RGBLED.begin();                               // Initiate the NeoPixel library
